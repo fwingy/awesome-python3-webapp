@@ -139,7 +139,7 @@ def datetime_filter(t):
 
 @asyncio.coroutine
 def init(loop):
-    yield from orm.create_pool(loop=loop, **configs.db)
+    yield from orm.create_pool(loop=loop, **configs.db)  # python3特性，调用函数时使用*和**“展 开”可迭代对象，映射到单个参数。参看《流畅的python》5.7
     app = web.Application(loop=loop, middlewares=[
         logger_factory, auth_factory, response_factory
     ])
